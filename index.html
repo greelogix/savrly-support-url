@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Savrly Support Center</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #FF3B1F;
+      --primary-glow: rgba(255, 59, 31, 0.15);
+      --primary-dark: #0F1011;
+      --accent: #1FC497;
+      --accent-glow: rgba(31, 196, 151, 0.15);
+      --background: #FAFAFB;
+      --card: #FFFFFF;
+      --text: #111827;
+      --subtext: #4B5563;
+      --muted: #9CA3AF;
+      --border: #E5E7EB;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.06);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      background: var(--primary-dark);
+      color: white;
+      padding: 120px 20px 180px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 59, 31, 0.15) 0%, transparent 70%);
+      top: -250px;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: blur(40px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero h1 {
+      font-size: 54px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      max-width: 580px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.7);
+      font-size: 18px;
+    }
+
+    /* --- FORM CONTAINER LAYOUT --- */
+    .main-container {
+      max-width: 680px;
+      margin: -100px auto 100px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .support-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    /* --- FORM STYLING --- */
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--background);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 4px var(--primary-glow);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255, 59, 31, 0.2);
+    }
+
+    .submit-btn:hover {
+      background: #e03219;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 59, 31, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* --- SUCCESS VIEW (HIDDEN BY DEFAULT) --- */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 24px;
+    }
+
+    .success-state h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .success-state p {
+      color: var(--subtext);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .back-home-btn:hover {
+      background: var(--background);
+      border-color: var(--muted);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 80px 20px 140px;
+      }
+      .hero h1 {
+        font-size: 38px;
+      }
+      .support-card {
+        padding: 32px 24px;
+        border-radius: var(--radius-md);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="badge">
+        👋 Savrly Help Desk
+      </div>
+      <h1>How can we help?</h1>
+      <p>
+        Got questions about exploring local restaurants, ticketing, or managing your profile? Send us details below and our team will be right with you.
+      </p>
+    </div>
+  </section>
+
+  <main class="main-container">
+    <div class="support-card">
+      
+      <form id="supportForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="userEmail">Your Email Address</label>
+          <input 
+            type="email" 
+            id="userEmail" 
+            placeholder="name@example.com" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="userQuery">How can we assist you?</label>
+          <textarea 
+            id="userQuery" 
+            placeholder="Describe your request, question, or issue in detail..." 
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Submit Request
+        </button>
+      </form>
+
+      <div id="successState" class="success-state">
+        <div class="success-icon">✓</div>
+        <h2>Your request has been submitted</h2>
+        <p>Thank you for contacting Savrly support. We have received your query and will reply to your email address within 24 hours.</p>
+        <a href="https://www.savrly.co" class="back-home-btn">
+          ← Return to Savrly
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    © 2025 Savrly, Inc. All rights reserved.
+  </footer>
+
+  <script>
+    function handleFormSubmit(event) {
+      // Prevent standard browser page reload
+      event.preventDefault();
+      
+      // Select elements
+      const supportForm = document.getElementById('supportForm');
+      const successState = document.getElementById('successState');
+      
+      // Here you could capture values for api processing if needed:
+      // const email = document.getElementById('userEmail').value;
+      // const query = document.getElementById('userQuery').value;
+      
+      // Switch layouts instantly
+      supportForm.style.display = 'none';
+      successState.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
